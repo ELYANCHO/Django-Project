@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django - El Framework Web para Perfeccionistas</title>
+    <link rel="icon" href="🐍" type="image/x-icon">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: #fff;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(221, 221, 221, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 20px 6%;
+            z-index: 1000;
+            border-bottom: 1px solid #000000ff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav .logo {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #0c4b33;
+            letter-spacing: -1px;
+        }
+        
+        nav .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        nav .nav-links a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav .nav-links a:hover {
+            color: #0c4b33;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, #000000ff 0%, #194121ff 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 150px 6% 100px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, rgba(12, 75, 51, 0.05) 0%, transparent 70%);
+            animation: float 25s ease-in-out infinite;
+            top: -300px;
+            right: -300px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 50px) scale(1.1); }
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 900px;
+        }
+        
+        .hero h1 {
+            font-size: 5.5em;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -3px;
+            color: #ffffffff;
+            line-height: 1.1;
+        }
+        
+        .hero p {
+            font-size: 1.4em;
+            color: #666;
+            margin-bottom: 50px;
+            line-height: 1.6;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 18px 48px;
+            background: #1a1a1a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #166245ff;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(126, 181, 161, 1);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #ffffffff;
+            border: 2px solid #060606ff;
+        }
+        
+        .btn-secondary:hover {
+            background: #1d4d29ff;
+            border-color: #1a1a1a;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .search-section {
+            text-align: center;
+            margin-top: 80px;
+            padding: 0 20px;
+        }
+        
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 1.05em;
+            border: 2px solid #e8e8e8;
+            border-radius: 50px;
+            background: #fff;
+            transition: all 0.3s;
+            outline: none;
+        }
+        
+        .search-box input:focus {
+            border-color: #0c4b33;
+            box-shadow: 0 8px 30px rgba(12, 75, 51, 0.1);
+        }
+        
+        .trending-tags {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .tag {
+            padding: 8px 20px;
+            background: #f8f9fa;
+            border-radius: 50px;
+            font-size: 0.9em;
+            color: #666;
+            border: 1px solid #e8e8e8;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #0c4b33;
+            color: #fff;
+            border-color: #0c4b33;
+        }
+        
+        section {
+            padding: 100px 6%;
+        }
+        
+        .section-white {
+            background: #e7e7e7ff;
+        }
+        
+        .section-gray {
+            background: #b8b8b8ff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            color: #1a1a1a;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 60px;
+            line-height: 1.7;
+            max-width: 700px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 24px;
+            transition: all 0.4s ease;
+            border: 1px solid #e8e8e8;
+        }
+        
+        .section-gray .card {
+            background: #fff;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            border-color: #0c4b33;
+        }
+        
+        .card h3 {
+            font-size: 1.6em;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 1em;
+        }
+        
+        .card ul {
+            list-style: none;
+        }
+        
+        .card ul li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #666;
+        }
+        
+        .card ul li:last-child {
+            border-bottom: none;
+        }
+        
+        .card ul li::before {
+            content: '✓';
+            color: #0c4b33;
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 1.1em;
+        }
+        
+        .feature-highlight {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin: 80px 0;
+        }
+        
+        .feature-visual {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, #0c4b33 0%, #44a08d 100%);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8em;
+            box-shadow: 0 30px 80px rgba(12, 75, 51, 0.2);
+        }
+        
+        .feature-text h3 {
+            font-size: 2.5em;
+            margin-bottom: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: #1a1a1a;
+        }
+        
+        .feature-text p {
+            color: #666;
+            font-size: 1.15em;
+            line-height: 1.8;
+        }
+        
+        .apps-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+        
+        .app-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 50px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 2px solid #e8e8e8;
+        }
+        
+        .app-card:hover {
+            background: linear-gradient(135deg, #0c4b33 0%, #44a08d 100%);
+            transform: scale(1.05);
+            border-color: #0c4b33;
+            box-shadow: 0 20px 60px rgba(12, 75, 51, 0.25);
+        }
+        
+        .app-icon {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            transition: transform 0.4s;
+        }
+        
+        .app-card:hover .app-icon {
+            transform: scale(1.1);
+        }
+        
+        .app-name {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #1a1a1a;
+            transition: color 0.4s;
+        }
+        
+        .app-card:hover .app-name {
+            color: #fff;
+        }
+        
+        footer {
+            background: #1a1a1a;
+            padding: 60px 6%;
+            text-align: center;
+        }
+        
+        footer p {
+            color: #999;
+            font-size: 0.95em;
+        }
+        
+        @media (max-width: 768px) {
+            nav .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 3em;
+            }
+            
+            .hero p {
+                font-size: 1.1em;
+            }
+            
+            .section-title {
+                font-size: 2.2em;
+            }
+            
+            .feature-highlight {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .apps-showcase {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        .app-icon3 {
+        /* Define el tamaño del área donde va el icono */
+        width: 40px;  /* Ejemplo: 60 píxeles de ancho */
+        height: 40px; /* Ejemplo: 60 píxeles de alto */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
+.app-icon img {
+    /* Haz que la imagen se ajuste al tamaño de su contenedor (.app-icon3) */
+    width: 70%;
+    height: 70%;
+    object-fit: contain; /* Asegura que la imagen no se distorsione */
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">DJANGO</div>
+        <div class="nav-links">
+            <a href="#que-es">¿Qué es?</a>
+            <a href="#funcion">Funciones</a>
+            <a href="#estructura">Estructura</a>
+            <a href="#ventajas">Ventajas</a>
+            <a href="#ejemplos">Ejemplos</a>
+        </div>
+    </nav>
+    
+    <div class="hero">
+        <div class="hero-content">
+    <div>
+        <div>
+            <img src="https://1000logos.net/wp-content/uploads/2020/08/Django-Logo-500x313.png">
+        </div>
+    </div>
+
+            
+            
+            <div class="hero-buttons">
+                <a href="#que-es" class="btn">Comenzar ahora</a>
+                <a href="#ejemplos" class="btn">Ver ejemplos</a>
+            </div>
+            
+            
+        </div>
+    </div>
+    
+    <section id="que-es" class="section-white">
+        <div class="container">
+            <h2 class="section-title">¿Qué es Django?</h2>
+            <p class="section-subtitle">Django es un framework web de código abierto, gratuito y escrito en Python, que permite desarrollar aplicaciones web de forma rápida y eficiente.</p>
+            
+            <div class="feature-highlight">
+                <div class="feature-visual">🐍</div>
+                <div class="feature-text">
+                    <h3>Potencia y Simplicidad Combinadas</h3>
+                    <p>Django elimina la complejidad del desarrollo web, permitiéndote concentrarte en escribir tu aplicación sin reinventar la rueda. Con su arquitectura elegante y herramientas integradas, puedes pasar de la idea al producto en tiempo récord.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="funcion" class="section-gray">
+        <div class="container">
+            <h2 class="section-title">Funciones principales</h2>
+            <p class="section-subtitle">Todo lo que necesitas para construir aplicaciones web modernas y escalables.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>🗄️ ORM Potente</h3>
+                    <p>Manejo de bases de datos mediante Object-Relational Mapping, sin necesidad de escribir SQL directamente.</p>
+                </div>
+                <div class="card">
+                    <h3>🔀 Enrutamiento URL</h3>
+                    <p>Sistema elegante de mapeo de URLs a vistas específicas para una arquitectura limpia.</p>
+                </div>
+                <div class="card">
+                    <h3>🔒 Seguridad Integrada</h3>
+                    <p>Protección contra SQL injection, XSS, CSRF y otras vulnerabilidades comunes.</p>
+                </div>
+                <div class="card">
+                    <h3>⚙️ Admin Automático</h3>
+                    <p>Interfaz de administración lista para usar desde el primer momento.</p>
+                </div>
+                <div class="card">
+                    <h3>👤 Autenticación</h3>
+                    <p>Sistema completo de gestión de usuarios, permisos y sesiones.</p>
+                </div>
+                <div class="card">
+                    <h3>📝 Formularios</h3>
+                    <p>Procesamiento y validación de formularios con protección integrada.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="estructura" class="section-white">
+        <div class="container">
+            <h2 class="section-title">Arquitectura MVT</h2>
+            <p class="section-subtitle">Django sigue el patrón Model-View-Template, una variación elegante del patrón MVC tradicional.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Models</h3>
+                    <p>Definen la estructura de los datos y manejan la interacción con la base de datos de forma intuitiva.</p>
+                </div>
+                <div class="card">
+                    <h3>Views</h3>
+                    <p>Contienen la lógica de negocio y procesan las peticiones HTTP, retornando respuestas apropiadas.</p>
+                </div>
+                <div class="card">
+                    <h3>Templates</h3>
+                    <p>Archivos HTML que definen cómo se presentan los datos al usuario final.</p>
+                </div>
+                <div class="card">
+                    <h3>URLs</h3>
+                    <p>Sistema de enrutamiento que conecta URLs con vistas específicas.</p>
+                </div>
+                <div class="card">
+                    <h3>Settings</h3>
+                    <p>Archivo de configuración central que controla el comportamiento del proyecto.</p>
+                </div>
+                <div class="card">
+                    <h3>Admin</h3>
+                    <p>Interfaz de administración automática para gestionar modelos sin código adicional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="ventajas" class="section-gray">
+        <div class="container">
+            <h2 class="section-title">Ventajas</h2>
+            <p class="section-subtitle">Las ventajas que hacen de Django la elección favorita de miles de desarrolladores.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>⚡ Desarrollo Rápido</h3>
+                    <ul>
+                        <li>Componentes reutilizables</li>
+                        <li>Admin automático</li>
+                        <li>ORM integrado</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🛡️ Seguridad</h3>
+                    <ul>
+                        <li>Protección CSRF</li>
+                        <li>Prevención XSS</li>
+                        <li>SQL injection bloqueado</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>📈 Escalabilidad</h3>
+                    <ul>
+                        <li>Usado por Instagram</li>
+                        <li>Millones de usuarios</li>
+                        <li>Alto rendimiento</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🌐 Comunidad</h3>
+                    <ul>
+                        <li>Documentación excelente</li>
+                        <li>Miles de paquetes</li>
+                        <li>Soporte activo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="desventajas" class="section-white">
+        <div class="container">
+            <h2 class="section-title">Desventajas</h2>
+            <p class="section-subtitle">Aspectos a tener en cuenta al elegir Django para tu proyecto.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>📚 Curva de Aprendizaje</h3>
+                    <p>Puede ser abrumador para principiantes debido a su gran cantidad de características y conceptos.</p>
+                </div>
+                <div class="card">
+                    <h3>🏗️ Estructura Completa</h3>
+                    <p>Su enfoque "todo incluido" puede ser excesivo para proyectos pequeños o APIs muy simples.</p>
+                </div>
+                <div class="card">
+                    <h3>🎯 Opinionado</h3>
+                    <p>Su estructura definida puede dificultar patrones de diseño no convencionales.</p>
+                </div>
+                <div class="card">
+                    <h3>⚙️ Overhead</h3>
+                    <p>Puede tener más overhead que frameworks minimalistas para aplicaciones muy básicas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="ejemplos" class="section-gray">
+        <div class="container">
+            <h2 class="section-title">Aplicaciones hechas en Django</h2>
+            <p class="section-subtitle">Empresas líderes mundiales construyen sus plataformas con Django</p>
+            
+           <div class="apps-showcase">
+    <div class="app-card">
+        <div class="app-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/960px-Instagram_icon.png" alt="Instagram Icon">
+        </div>
+        <div class="app-name">Instagram</div>
+    </div>
+    <div class="app-card">
+        <div class="app-icon">
+            <img src="
+
+https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png
+" alt="Pinterest Icon">
+        </div>
+        <div class="app-name">Pinterest</div>
+    </div>
+    <div class="app-card">
+        <div class="app-icon">
+            <img src="
+
+https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg
+" alt="Spotify Icon">
+        </div>
+        <div class="app-name">Spotify</div>
+    </div>
+    <div class="app-card">
+        <div class="app-icon">
+            <img src="
+
+https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png
+" alt="YouTube Icon">
+        </div>
+        <div class="app-name">YouTube</div>
+    </div>
+</div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>Desarrollado por Elyan Cristancho</p>
+    </footer>
+</body>
+</html>
