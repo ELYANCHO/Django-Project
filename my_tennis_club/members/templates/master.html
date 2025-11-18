@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* NAVEGACIÓN */
+        nav {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: flex-start; 
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav .logo {
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #228B22;
+        }
+
+        /* SECCIÓN PRINCIPAL CON IMAGEN DE FONDO */
+        #inicio {
+            background-image: url('my_tennis_club/members/templates/foto.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;  /* ← CAMBIÉ A flex-end */
+            position: relative;
+
+            margin-top: 60px;
+            padding-right: 100px;
+        }
+
+        #inicio::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+        }
+
+        .hero-content p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero-content .btn {
+            display: inline-block;
+            background: #228B22;
+            color: white;
+            padding: 20px 40px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero-content .btn:hover {
+            background: #1a6b1a;
+            transform: translateY(-2px);
+        }
+
+        /* SECCIONES GENERALES */
+        section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 50px;
+            color: #228B22;
+        }
+
+        /* SECCIÓN HORARIOS */
+        #horarios {
+            background: white;
+        }
+
+        .horarios-content {
+            background: #228B22;
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .horarios-content ul {
+            list-style: none;
+            font-size: 1.3em;
+            line-height: 2.5;
+        }
+
+        /* SECCIÓN CONTACTO */
+        #contacto {
+            background: #333;
+            color: white;
+        }
+
+        .contacto-content {
+            text-align: center;
+        }
+
+        .contacto-content h2 {
+            color: white;
+        }
+
+        .contacto-info {
+            font-size: 1.3em;
+            line-height: 2.5;
+            margin-top: 30px;
+        }
+
+        .contacto-info p {
+            margin: 10px 0;
+        }
+
+
+
+        /* SECCIÓN MIEMBROS */
+        #MIEMBROS {
+            background: white;
+        }
+
+        .MIEMBROS-content {
+            background: #b1b9b1ff;
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .MIEMBROS-content ul {
+            list-style: none;
+            font-size: 1.3em;
+            line-height: 2.5;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- NAVEGACIÓN -->
+    <nav>
+        <div class="container">
+            <div class="logo">CLUB TENIS</div>
+        </div>
+    </nav>
+
+    <!-- SECCIÓN PRINCIPAL -->
+    <section id="inicio">
+        <div class="hero-content">
+            <h1>🎾 CLUB DE TENIS 🎾</h1>
+            <a href="#horarios" class="btn">Ver Miembros</a>
+        </div>
+    </section>
+
+
+
+    <!-- SECCIÓN HORARIOS -->
+    <section id="horarios">
+        <div class="container">
+
+               <div class= "MIEMBROS-content" {% block content %}
+                {% endblock %}
+                </div>
+               <br>
+            <h2>Horarios</h2>
+            <div class="horarios-content">
+                <ul>
+                    <li>🗓️ Lunes a Viernes: 6:00 AM - 10:00 PM</li>
+                    <li>🗓️ Sábados: 7:00 AM - 9:00 PM</li>
+                    <li>🗓️ Domingos: 8:00 AM - 8:00 PM</li>
+                </ul>
+                <p style="margin-top: 30px; font-size: 1.2em;">¡Reserva tu cancha con anticipación!</p>
+            </div>
+        </div>
+    </section>
+
+        <!-- SECCIÓN CONTACTO -->
+    <footer>
+    <div id="contacto">
+        <div class="container">
+            <div class="contacto-content">
+                <h2>Contáctanos</h2>
+                <div class="contacto-info">
+                    <p>📍 Avenida Principal #123, Ciudad</p>
+                    <p>📞 Teléfono: (123) 456-7890</p>
+                    <p>📧 Email: info@clubteniselite.com</p>
+                    <p>🌐 www.clubteniselite.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </footer>
+    
+</body>
+</html>
