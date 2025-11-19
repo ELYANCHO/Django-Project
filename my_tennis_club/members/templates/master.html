@@ -59,16 +59,15 @@
 
         /* SECCIÓN PRINCIPAL CON IMAGEN DE FONDO */
         #inicio {
-            background-image: url('my_tennis_club/members/templates/foto.jpg');
+            background-image: url('https://images.unsplash.com/photo-1710980098713-048169a97555?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: flex-end;  /* ← CAMBIÉ A flex-end */
+            justify-content: flex-end;
             position: relative;
-
             margin-top: 60px;
             padding-right: 100px;
         }
@@ -105,7 +104,7 @@
 
         .hero-content .btn {
             display: inline-block;
-            background: #228B22;
+            background: #856a20ff;
             color: white;
             padding: 20px 40px;
             text-decoration: none;
@@ -116,7 +115,7 @@
         }
 
         .hero-content .btn:hover {
-            background: #1a6b1a;
+            background: #856a20ff;
             transform: translateY(-2px);
         }
 
@@ -138,7 +137,7 @@
             text-align: center;
             font-size: 3em;
             margin-bottom: 50px;
-            color: #228B22;
+            color: #000000ff;
         }
 
         /* SECCIÓN HORARIOS */
@@ -147,7 +146,7 @@
         }
 
         .horarios-content {
-            background: #228B22;
+            background: #3d6eb6ff;
             color: white;
             padding: 50px;
             border-radius: 15px;
@@ -161,31 +160,45 @@
             line-height: 2.5;
         }
 
-        /* SECCIÓN CONTACTO */
-        #contacto {
-            background: #333;
+        /* FOOTER */
+        footer {
+            background: #1a1a1a;
             color: white;
-        }
-
-        .contacto-content {
+            padding: 40px 20px;
             text-align: center;
         }
 
-        .contacto-content h2 {
-            color: white;
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #ffffffff;
         }
 
         .contacto-info {
-            font-size: 1.3em;
-            line-height: 2.5;
-            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin: 20px 0;
         }
 
         .contacto-info p {
-            margin: 10px 0;
+            font-size: 1.1em;
+            margin: 5px 0;
         }
 
-
+        footer .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9em;
+            color: #999;
+        }
 
         /* SECCIÓN MIEMBROS */
         #MIEMBROS {
@@ -193,7 +206,7 @@
         }
 
         .MIEMBROS-content {
-            background: #b1b9b1ff;
+            background: #8b6c3cff;
             color: white;
             padding: 50px;
             border-radius: 15px;
@@ -206,7 +219,6 @@
             font-size: 1.3em;
             line-height: 2.5;
         }
-
     </style>
 </head>
 <body>
@@ -225,16 +237,19 @@
         </div>
     </section>
 
-
-
     <!-- SECCIÓN HORARIOS -->
     <section id="horarios">
         <div class="container">
+            <h2>Miembros</h2>
+            <div class="MIEMBROS-content">
 
-               <div class= "MIEMBROS-content" {% block content %}
+                <h1>Miembros del Club</h1>
+                <div> {% block content %}
                 {% endblock %}
                 </div>
-               <br>
+            </div>
+            <br>
+            <br>
             <h2>Horarios</h2>
             <div class="horarios-content">
                 <ul>
@@ -247,22 +262,20 @@
         </div>
     </section>
 
-        <!-- SECCIÓN CONTACTO -->
+    <!-- FOOTER -->
     <footer>
-    <div id="contacto">
         <div class="container">
-            <div class="contacto-content">
-                <h2>Contáctanos</h2>
-                <div class="contacto-info">
-                    <p>📍 Avenida Principal #123, Ciudad</p>
-                    <p>📞 Teléfono: (123) 456-7890</p>
-                    <p>📧 Email: info@clubteniselite.com</p>
-                    <p>🌐 www.clubteniselite.com</p>
-                </div>
+            <h3>Contáctanos</h3>
+            <div class="contacto-info">
+                <p>📍 Avenida Principal #123, Ciudad</p>
+                <p>📞 (123) 456-7890</p>
+                <p>📧 info@clubteniselite.com</p>
+                <p>🌐 www.clubteniselite.com</p>
+            </div>
+            <div class="copyright">
+                <p>&copy; Club de tenis. Todos los derechos reservados.</p>
             </div>
         </div>
-    </div>
     </footer>
-    
 </body>
 </html>
