@@ -8,3 +8,6 @@ class Member(models.Model):
   favorite_game = models.CharField(null=True)
   playing_hours = models.IntegerField(null=True)
   game_gender = models.CharField(null=True)
+  
+  def __str__(self):
+    return f"{self.firstname} {self.lastname}"
