@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1 style ="color: violet;"> Create variables from array</h1>
+{% for x in fruits %}
+  <h3>{{ x }}</h3>
+{% endfor %}
+
+<h1 style ="color: orange;"> Create a new variable</h1>
+{% with new_fruit="Pear" %}
+<h3>New fruit: {{ new_fruit }}</h3>
+{% endwith %}
+
+<h1 style ="color: red;"> Call Varriables from model members</h1>
+<ul>
+{% for miembro in miembros %}
+<li>{{ miembro.firstname }}</li>
+{% endfor %}
+</ul>
+<br>
+<p>In views.py you can see what the fruits variable looks like.</p>
+
+<h1 style ="color: green;"> Tag 1  "Lorem ipsum"</h1>
+{% lorem 50 w %}
+{% lorem 2 p %}
+
+<h1 style ="color: green;"> Tag 2</h1>
+
+<h1 style ="color: green;"> Tag 3</h1>
+
+
+<h1 style ="color: green;"> Tag 4</h1>
+
+
+<h1 style ="color: green;"> Tag 5</h1>
+
+
+</body>
+</html>
