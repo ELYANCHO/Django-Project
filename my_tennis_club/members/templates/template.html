@@ -23,17 +23,21 @@
 
 <h1 style ="color: green;"> Tag 1  "Lorem ipsum"</h1>
 {% lorem 50 w %}
-{% lorem 2 p %}
+{% lorem 1p %}
 
-<h1 style ="color: green;"> Tag 2</h1>
+<h1 style ="color: green;"> Tag 2 "Include"</h1>
+{% include 'black_friday.html' %}
 
-<h1 style ="color: green;"> Tag 3</h1>
-
+<h1 style ="color: green;"> Tag 3 "comment"</h1>
+{% comment %}
+  <h1>Greetings!</h2>
+{% endcomment %}
 
 <h1 style ="color: green;"> Tag 4</h1>
 
-
 <h1 style ="color: green;"> Tag 5</h1>
+
+
 
 
 </body>
