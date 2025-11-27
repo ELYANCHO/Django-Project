@@ -1,5 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
+  <head>
+  
+    <link rel="stylesheet" href="{% static 'stylestemplate.css' %}">
+</head>
 <body>
 
 <h1 style ="color: violet;"> Create variables from array</h1>
@@ -33,12 +38,288 @@
   <h1>Greetings!</h2>
 {% endcomment %}
 
-<h1 style ="color: green;"> Tag 4</h1>
+   <section class="tarjeta">
+      <h2>Django Tags</h2>
+      <h3>Lorem Ipsum</h3>
+      {% lorem 5 p %}
 
-<h1 style ="color: green;"> Tag 5</h1>
+      {% csrf_token %}
+
+      <h3>Fecha Actual</h3>
+      <p>{% now "Y-m-d" %}</p>
+    </section>
 
 
+    <section class="tarjeta">
+      <h2>Condicional IF</h2>
+      {% for miembro in miembros %}
+      {% if miembro.firstname == "Felipe" %}
+      <p class="alerta">Hola Admin {{ miembro.firstname }}</p>
+      {% endif %}
+      {% endfor %}
+    </section>
 
+
+    <section class="tarjeta">
+      <h2>Black Friday Include</h2>
+      {% include 'black_friday.html' %}
+    </section>
+
+    <section class="tarjeta">
+      <div class="query-section-header">
+        <h2>Query Sets</h2>
+      </div>
+      <p style="color: var(--text-light); margin-bottom: 30px; font-size: 1.05rem;">
+        Demostración completa de operaciones de consulta en Django ORM con resultados organizados
+      </p>
+
+      <h3>📊 Columnas por Firstname</h3>
+      <table class="query-table">
+        <thead>
+          <tr>
+            <th>Firstname</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in column_firstname %}
+          <tr>
+            <td>{{ x }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <img src="{% static 'members/image.png' %}" class="img-small">
+
+      <h3>🎯 Return Specific Columns</h3>
+      <table class="query-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Juego Favorito</th>
+            <th>Genero del Juego</th>
+            <th>Horas Jugadas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in records_elyan %}
+          <tr>
+            <td>{{ x.id }}</td>
+            <td>{{ x.firstname }}</td>
+            <td>{{ x.lastname }}</td>
+            <td>{{ x.phone }}</td>
+            <td>{{ x.favorite_game }}</td>
+            <td>{{ x.game_gender }}</td>
+            <td>{{ x.playing_hours }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h3>🔗 Filter con AND (Operador múltiple)</h3>
+      <table class="query-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Juego Favorito</th>
+            <th>Genero del Juego</th>
+            <th>Horas Jugadas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in records_AND_name_id %}
+          <tr>
+            <td>{{ x.id }}</td>
+            <td>{{ x.firstname }}</td>
+            <td>{{ x.lastname }}</td>
+            <td>{{ x.phone }}</td>
+            <td>{{ x.favorite_game }}</td>
+            <td>{{ x.game_gender }}</td>
+            <td>{{ x.playing_hours }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h3>⚡ Filter con OR (Operador alternativo)</h3>
+      <table class="query-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Juego Favorito</th>
+            <th>Genero del Juego</th>
+            <th>Horas Jugadas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in records_OR_name_id %}
+          <tr>
+            <td>{{ x.id }}</td>
+            <td>{{ x.firstname }}</td>
+            <td>{{ x.lastname }}</td>
+            <td>{{ x.phone }}</td>
+            <td>{{ x.favorite_game }}</td>
+            <td>{{ x.game_gender }}</td>
+            <td>{{ x.playing_hours }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    
+
+      <h3>🔤 Filter Like - Comienza con (Startswith)</h3>
+      <table class="query-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Juego Favorito</th>
+            <th>Genero del Juego</th>
+            <th>Horas Jugadas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in records_like_start %}
+          <tr>
+            <td>{{ x.id }}</td>
+            <td>{{ x.firstname }}</td>
+            <td>{{ x.lastname }}</td>
+            <td>{{ x.phone }}</td>
+            <td>{{ x.favorite_game }}</td>
+            <td>{{ x.game_gender }}</td>
+            <td>{{ x.playing_hours }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h3>🔤 Filter Like - Termina con (Endswith)</h3>
+      <table class="query-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Juego Favorito</th>
+            <th>Genero del Juego</th>
+            <th>Horas Jugadas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in records_like_end %}
+          <tr>
+            <td>{{ x.id }}</td>
+            <td>{{ x.firstname }}</td>
+            <td>{{ x.lastname }}</td>
+            <td>{{ x.phone }}</td>
+            <td>{{ x.favorite_game }}</td>
+            <td>{{ x.game_gender }}</td>
+            <td>{{ x.playing_hours }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h3>🔍 Filter Contains - Contiene texto</h3>
+      <table class="query-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Juego Favorito</th>
+            <th>Genero del Juego</th>
+            <th>Horas Jugadas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in records_like_contains %}
+          <tr>
+            <td>{{ x.id }}</td>
+            <td>{{ x.firstname }}</td>
+            <td>{{ x.lastname }}</td>
+            <td>{{ x.phone }}</td>
+            <td>{{ x.favorite_game }}</td>
+            <td>{{ x.game_gender }}</td>
+            <td>{{ x.playing_hours }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h3>⬆ Order By ASC - Ordenamiento Ascendente</h3>
+      <table class="query-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in order_by_asc %}
+          <tr>
+            <td>{{ x.id }}</td>
+            <td>{{ x.firstname }}</td>
+            <td>{{ x.lastname }}</td>
+            <td>{{ x.email }}</td>
+            <td>{{ x.phone }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h3>⬇ Order By DESC - Ordenamiento Descendente</h3>
+      <table class="query-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in order_by_desc %}
+          <tr>
+            <td>{{ x.id }}</td>
+            <td>{{ x.firstname }}</td>
+            <td>{{ x.lastname }}</td>
+            <td>{{ x.email }}</td>
+            <td>{{ x.phone }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+
+  <footer class="footer">
+    <div class="footer-columns">
+
+    <div class="footer-bottom">
+      © 2025 Proyecto Django – Todos los derechos reservados
+    </div>
+  </footer>
 
 </body>
+
 </html>
